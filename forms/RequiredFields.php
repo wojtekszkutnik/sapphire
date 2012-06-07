@@ -46,7 +46,7 @@ class RequiredFields extends Validator {
 
 	 $result = "<ul>";
 	 foreach( $this->required as $name ){
-	 	$result .= "<li>$name</li>";
+		$result .= "<li>$name</li>";
 	 }
 
 	 $result .= "</ul>";

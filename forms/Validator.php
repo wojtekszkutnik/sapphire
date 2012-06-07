@@ -11,12 +11,12 @@
  * @subpackage validators
  */ 
 abstract class Validator extends Object {
-	
+
 	/**
 	 * @var Form $form
 	 */
 	protected $form;
-	
+
 	/**
 	 * @var array $errors
 	 */
@@ -60,24 +60,24 @@ abstract class Validator extends Object {
 		$this->form = $form;
 		return $this;
 	}
-	
+
 	/**
 	 * @return array Errors (if any)
 	 */
 	function validate(){
 		$this->errors = null;
 
-        // call individual field validators first
-        $fields = $this->form->Fields();
-        foreach($fields as $field) {
-            $valid = ($field->validate($this));
-        }
+		// call individual field validators first
+		$fields = $this->form->Fields();
+		foreach($fields as $field) {
+			$valid = ($field->validate($this));
+		}
 
-        // then call the global form validator
+		// then call the global form validator
 		$this->php($this->form->getData());
 		return $this->errors;
 	}
-	
+
 	/**
 	 * Callback to register an error on a field (Called from implementations of {@link FormField::validate})
 	 * 
@@ -92,7 +92,7 @@ abstract class Validator extends Object {
 			'messageType' => $messageType,
 		);
 	}
-	
+
 	/**
 	 * Returns all errors found by a previous call to {@link validate()}.
 	 * The array contains the following keys for each error:
@@ -107,16 +107,16 @@ abstract class Validator extends Object {
 	function getErrors() {
 		return $this->errors;
 	}
-	
+
 	function requireField($fieldName, $data) {
 		if(is_array($data[$fieldName]) && count($data[$fieldName])) {
 			foreach($data[$fieldName] as $componentkey => $componentVal){
 				if(!strlen($componentVal)) $this->validationError($fieldName, "$fieldName $componentkey is required.", "required");
 			}
-			
+
 		}else if(!strlen($data[$fieldName])) $this->validationError($fieldName, "$fieldName is required.", "required");
 	}
-	
+
 	/**
 	 * Returns true if the named field is "required".
 	 * Used by FormField to return a value for FormField::Required(), to do things like show *s on the form template.
@@ -125,7 +125,7 @@ abstract class Validator extends Object {
 	function fieldIsRequired($fieldName) {
 		return false;
 	}
-	
+
 	abstract function php($data);
 }
 
