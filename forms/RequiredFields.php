@@ -59,11 +59,8 @@ class RequiredFields extends Validator {
 	*/
 	function php($data) {
 		$valid = true;
-
 		$fields = $this->form->Fields();
-		foreach($fields as $field) {
-			$valid = ($field->validate($this) && $valid);
-		}
+
 		if($this->required) {
 			foreach($this->required as $fieldName) {
 				if(!$fieldName) continue;

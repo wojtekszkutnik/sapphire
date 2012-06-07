@@ -66,6 +66,14 @@ abstract class Validator extends Object {
 	 */
 	function validate(){
 		$this->errors = null;
+
+        // call individual field validators first
+        $fields = $this->form->Fields();
+        foreach($fields as $field) {
+            $valid = ($field->validate($this));
+        }
+
+        // then call the global form validator
 		$this->php($this->form->getData());
 		return $this->errors;
 	}
