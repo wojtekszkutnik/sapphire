@@ -188,6 +188,11 @@ class ArrayLib {
      * @return array merged args/defaults arrays
      */
     static function parse_args($args, $defaults=array()) {
+        $args_count = count($args);
+        if ($args_count == 0) {
+            return $defaults;
+        }
+
         return array_merge( $defaults, $args );
     }
 }
