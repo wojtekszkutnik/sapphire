@@ -176,4 +176,18 @@ class ArrayLib {
 		}
 		return $merged;
 	}
+
+    /**
+     * Merges the default arg values with the ones provided by the user
+     *
+     * kwargs emulation
+     *
+     * @static
+     * @param array $args arguments passed to the function
+     * @param array $defaults  default values
+     * @return array merged args/defaults arrays
+     */
+    static function parse_args($args, $defaults=array()) {
+        return array_merge( $defaults, $args );
+    }
 }
