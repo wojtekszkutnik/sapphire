@@ -192,7 +192,22 @@ class ArrayLib {
         if ($args_count == 0) {
             return $defaults;
         }
+        if (is_array($args[$args_count-1]) && array_key_exists ('kwargs', $args[$args_count-1])) {
+            unset($args[$args_count-1]['kwargs']);
+            $arguments = array_pop($args);
+            $args_count--;
+        }
+        else {
+            $arguments = array();
+        }
+        $defaults_keys = array_keys($defaults);
+        $args_iterator = 0;
+        while(--$args_count) {
+            $argument_key = array_shift($defaults_keys);
+            $arguments[$argument_key] = $args[$args_iterator];
+            $args_iterator++;
+        }
 
-        return array_merge( $defaults, $args );
+        return array_merge( $defaults, $arguments );
     }
 }
