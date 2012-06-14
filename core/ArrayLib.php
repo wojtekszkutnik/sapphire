@@ -189,25 +189,38 @@ class ArrayLib {
 	 */
 	static function parse_args($args, $defaults=array()) {
 		$args_count = count($args);
+
+        // if no arguments were passed, we just return the default values
 		if ($args_count == 0) {
 			return $defaults;
 		}
+
+        // if the last argument contains the 'kwargs' key, the arguments structure uses our kwargs system
+        // this way we assure backwards compatibility (theoretically, some function could take an array as the
+        // last argument and our method would treat it as a kwargs list)
 		if (is_array($args[$args_count-1]) && array_key_exists ('kwargs', $args[$args_count-1])) {
+            // pre-populate the arguments list with kwargs
 			unset($args[$args_count-1]['kwargs']);
 			$arguments = array_pop($args);
 			$args_count--;
 		}
 		else {
+            // initialize the arguments list if no kwargs are present
 			$arguments = array();
 		}
 		$defaults_keys = array_keys($defaults);
 		$args_iterator = 0;
+        // for backwards compatibility, if there are some args of old type present,
+        // fill kwargs starting with first keys from the $defaults array:
+        // for an old-version function dummy($arga, $argb), your defaults array should look like:
+        // $defaults = array('arga'=>null, 'argb'=>null);
 		while(--$args_count) {
 			$argument_key = array_shift($defaults_keys);
 			$arguments[$argument_key] = $args[$args_iterator];
 			$args_iterator++;
 		}
 
+        // merge the defaults with given arguments
 		return array_merge( $defaults, $arguments );
 	}
 }
