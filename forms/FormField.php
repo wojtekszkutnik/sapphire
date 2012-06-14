@@ -122,11 +122,19 @@ class FormField extends RequestHandler {
 	 * @param title The field label.
 	 * @param value The value of the field.
 	 */
-	function __construct($name, $title = null, $value = null) {
+	function __construct() {
+        $defaults = array(
+            'name' => 'FormField Name',
+            'title' => null,
+            'value' => null,
+        );
+        $args = ArrayLib::parse_args(func_get_args(), $defaults);
+        extract($args);
+
 		$this->name = $name;
 		$this->title = ($title === null) ? $name : $title;
 
-		if($value !== NULL) $this->setValue($value);
+		if($value !== null) $this->setValue($value);
 
 		parent::__construct();
 	}
