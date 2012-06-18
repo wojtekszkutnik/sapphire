@@ -805,13 +805,14 @@ class FormField extends RequestHandler {
 	/**
 	 * Abstract method each {@link FormField} subclass must implement,
 	 * determines whether the field is valid or not based on the value.
-	 * @todo Make this abstract.
 	 *
 	 * @param Validator
 	 * @return boolean
 	 */
 	function validate($validator) {
-		return true;
+		foreach ($this->validators as $validator) {
+
+        }
 	}
 
 	/**
