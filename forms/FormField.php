@@ -809,9 +809,9 @@ class FormField extends RequestHandler {
 	 * @param Validator
 	 * @return boolean
 	 */
-	function validate($validator) {
+	function validate() {
 		foreach ($this->validators as $validator) {
-
+            $validator->validate($this);
         }
 	}
 
