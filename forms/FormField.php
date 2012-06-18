@@ -92,6 +92,14 @@ class FormField extends RequestHandler {
 	 */
 	protected $attributes = array();
 
+
+    /**
+     * List of validators, applied to the FormField
+     *
+     * @var array
+     */
+    protected $validators = array();
+
 	/**
 	 * Takes a fieldname and converts camelcase to spaced
 	 * words. Also resolves combined fieldnames with dot syntax
@@ -197,7 +205,7 @@ class FormField extends RequestHandler {
 	} 
 
 	/**
-	 * Returns the field value - used by templates.
+	 * Returns the field value - used by templates and validators.
 	 */
 	function Value() {
 		return $this->value;
@@ -342,6 +350,16 @@ class FormField extends RequestHandler {
 		$this->attributes[$name] = $value;
 		return $this;
 	}
+
+    /**
+     * Add a validator to the FormField element. Used both for custom and default ones.
+     *
+     * @param Validator $validator
+     */
+    function addValidator(Validator $validator) {
+        if (! in_array($validator, $this->validators))
+            $this->validators[] = $validator;
+    }
 
 	/**
 	 * Get an HTML attribute defined by the field, or added through {@link setAttribute()}.
