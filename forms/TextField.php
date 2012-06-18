@@ -15,10 +15,10 @@ class TextField extends FormField {
 	/**
 	 * Returns an input field, class="text" and type="text" with an optional maxlength
 	 */
-	function __construct($name, $title = null, $value = '', $maxLength = null, $form = null) {
+	function __construct($name, $title = null, $value = '', $maxLength = null) {
 		$this->maxLength = $maxLength;
 		
-		parent::__construct($name, $title, $value, $form);
+		parent::__construct($name, $title, $value);
 	}
 	
 	/**

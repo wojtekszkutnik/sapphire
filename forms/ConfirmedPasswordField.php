@@ -68,6 +68,9 @@ class ConfirmedPasswordField extends FormField {
 	 * @param string $titleConfirmField Alternate title (not localizeable)
 	 */
 	function __construct($name, $title = null, $value = "", $form = null, $showOnClick = false, $titleConfirmField = null) {
+        /*
+        @todo:remove form from arguments list
+        */
 		// naming with underscores to prevent values from actually being saved somewhere
 		$this->children = new FieldList(
 			new PasswordField(
@@ -89,7 +92,7 @@ class ConfirmedPasswordField extends FormField {
 		// we have labels for the subfields
 		$title = false;
 		
-		parent::__construct($name, $title, null, $form);
+		parent::__construct($name, $title);
 		$this->setValue($value);
 	}
 	

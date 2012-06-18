@@ -127,7 +127,7 @@ class DropdownField extends FormField {
 		if($emptyString) $this->setHasEmptyDefault(true);
 		if(is_string($emptyString)) $this->setEmptyString($emptyString);
 
-		parent::__construct($name, ($title===null) ? $name : $title, $value, $form);
+		parent::__construct($name, ($title===null) ? $name : $title, $value);
 	}
 	
 	function Field($properties = array()) {
