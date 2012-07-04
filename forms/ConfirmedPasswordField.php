@@ -8,21 +8,21 @@
  * @subpackage fields-formattedinput
  */
 class ConfirmedPasswordField extends FormField {
-	
+
 	/**
 	 * Minimum character length of the password.
 	 *
 	 * @var int
 	 */
 	public $minLength = null;
-	
+
 	/**
 	 * Maximum character length of the password.
 	 *
 	 * @var int
 	 */
 	public $maxLength = null;
-	
+
 	/**
 	 * Enforces at least one digit and one alphanumeric
 	 * character (in addition to {$minLength} and {$maxLength}
@@ -30,14 +30,14 @@ class ConfirmedPasswordField extends FormField {
 	 * @var boolean
 	 */
 	public $requireStrongPassword = false;
-	
+
 	/**
 	 * Allow empty fields in serverside validation
 	 *
 	 * @var boolean
 	 */
 	public $canBeEmpty = false;
-	
+
 	/**
 	 * If set to TRUE, the "password" and "confirm password"
 	 * formfields will be hidden via CSS and JavaScript by default,
@@ -50,7 +50,7 @@ class ConfirmedPasswordField extends FormField {
 	 * @param boolean $showOnClick
 	 */
 	protected $showOnClick = false;
-	
+
 	/**
 	 * Title for the link that triggers
 	 * the visibility of password fields.
@@ -58,7 +58,7 @@ class ConfirmedPasswordField extends FormField {
 	 * @var string
 	 */
 	public $showOnClickTitle;
-	
+
 	/**
 	 * @param string $name
 	 * @param string $title
@@ -68,9 +68,9 @@ class ConfirmedPasswordField extends FormField {
 	 * @param string $titleConfirmField Alternate title (not localizeable)
 	 */
 	function __construct($name, $title = null, $value = "", $form = null, $showOnClick = false, $titleConfirmField = null) {
-        if ($form) {
-            Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
-        }
+		if ($form) {
+			Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
+		}
 		// naming with underscores to prevent values from actually being saved somewhere
 		$this->children = new FieldList(
 			new PasswordField(
@@ -82,27 +82,27 @@ class ConfirmedPasswordField extends FormField {
 				(isset($titleConfirmField)) ? $titleConfirmField : _t('Member.CONFIRMPASSWORD', 'Confirm Password')
 			)
 		);
-		
+
 		// has to be called in constructor because Field() isn't triggered upon saving the instance
 		if($showOnClick) {
 			$this->children->push(new HiddenField("{$name}[_PasswordFieldVisible]"));
 		}
 		$this->showOnClick = $showOnClick;
-		
+
 		// we have labels for the subfields
 		$title = false;
-		
+
 		parent::__construct($name, $title);
 		$this->setValue($value);
 	}
-	
+
 	function Field($properties = array()) {
 		Requirements::javascript(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
 		Requirements::javascript(FRAMEWORK_DIR . '/javascript/ConfirmedPasswordField.js');
 		Requirements::css(FRAMEWORK_DIR . '/css/ConfirmedPasswordField.css');
-		
+
 		$content = '';
-		
+
 		if($this->showOnClick) {
 			if($this->showOnClickTitle) {
 				$title = $this->showOnClickTitle;
@@ -110,11 +110,11 @@ class ConfirmedPasswordField extends FormField {
 				$title = _t(
 					'ConfirmedPasswordField.SHOWONCLICKTITLE', 
 					'Change Password', 
-					
+
 					'Label of the link which triggers display of the "change password" formfields'
 				);
 			}
-			
+
 			$content .= "<div class=\"showOnClick\">\n";
 			$content .= "<a href=\"#\">{$title}</a>\n";
 			$content .= "<div class=\"showOnClickContainer\">";
@@ -130,10 +130,10 @@ class ConfirmedPasswordField extends FormField {
 			$content .= "</div>\n";
 			$content .= "</div>\n";
 		}
-		
+
 		return $content;
 	}
-	
+
 	/**
 	 * Can be empty is a flag that turns on/off empty field checking.
 	 * For example, set this to false (the default) when creating a user account,
@@ -143,7 +143,7 @@ class ConfirmedPasswordField extends FormField {
 		$this->canBeEmpty = (bool)$value;
 		return $this;
 	}
-	
+
 	/**
 	 * The title on the link which triggers display of the
 	 * "password" and "confirm password" formfields.
@@ -155,21 +155,21 @@ class ConfirmedPasswordField extends FormField {
 		$this->showOnClickTitle = $title;
 		return $this;
 	}
-	
+
 	/**
 	 * @return string
 	 */
 	public function getShowOnClickTitle() {
 		return $this->showOnClickTitle;
 	}
-	
+
 	function setRightTitle($title) {
 		foreach($this->children as $field) {
 			$field->setRightTitle($title);
 		}
 		return $this;
 	}
-	
+
 	/**
 	 * @param array: 2 entrie array with the customised title for each of the 2 children.
 	 */
@@ -184,7 +184,7 @@ class ConfirmedPasswordField extends FormField {
 		}
 		return $this;
 	}
-	
+
 	/**
 	 * Value is sometimes an array, and sometimes a single value, so we need to handle both cases
 	 */
@@ -218,20 +218,20 @@ class ConfirmedPasswordField extends FormField {
 		$isVisible = $this->children->fieldByName($this->getName() . '[_PasswordFieldVisible]');
 		return (!$this->showOnClick || ($this->showOnClick && $isVisible && $isVisible->Value()));
 	}
-	
+
 	function validate($validator) {
 		$name = $this->name;
-		
+
 		// if field isn't visible, don't validate
 		if(!$this->isSaveable()) return true; 
-		
+
 		$passwordField = $this->children->fieldByName($name.'[_Password]');
 		$passwordConfirmField = $this->children->fieldByName($name.'[_ConfirmPassword]');
 		$passwordField->setValue($_POST[$name]['_Password']);
 		$passwordConfirmField->setValue($_POST[$name]['_ConfirmPassword']);
-		
+
 		$value = $passwordField->Value();
-		
+
 		// both password-fields should be the same
 		if($value != $passwordConfirmField->Value()) {
 			$validator->validationError($name, _t('Form.VALIDATIONPASSWORDSDONTMATCH',"Passwords don't match"), "validation", false);
@@ -245,7 +245,7 @@ class ConfirmedPasswordField extends FormField {
 				return false;
 			}
 		}
-			
+
 		// lengths
 		if(($this->minLength || $this->maxLength)) {
 			if($this->minLength && $this->maxLength) {
@@ -278,7 +278,7 @@ class ConfirmedPasswordField extends FormField {
 				);
 			}
 		}
-		
+
 		if($this->requireStrongPassword) {
 			if(!preg_match('/^(([a-zA-Z]+\d+)|(\d+[a-zA-Z]+))[a-zA-Z0-9]*$/',$value)) {
 				$validator->validationError(
@@ -292,7 +292,7 @@ class ConfirmedPasswordField extends FormField {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Only save if field was shown on the client,
 	 * and is not empty.
@@ -302,12 +302,12 @@ class ConfirmedPasswordField extends FormField {
 	 */
 	function saveInto(DataObjectInterface $record) {
 		if(!$this->isSaveable()) return false;
-		
+
 		if(!($this->canBeEmpty && !$this->value)) {
 			parent::saveInto($record);
 		}
 	}
-	
+
 	/**
 	 * Makes a pretty readonly field with some stars in it
 	 */

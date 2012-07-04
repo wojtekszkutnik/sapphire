@@ -18,7 +18,7 @@
 class FormAction extends FormField {
 
 	protected $action;
-	
+
 	/**
 	 * Enables the use of <button> instead of <input>
 	 * in {@link Field()} - for more customizeable styling.
@@ -26,9 +26,9 @@ class FormAction extends FormField {
 	 * @var boolean $useButtonTag
 	 */
 	public $useButtonTag = false;
-	
+
 	protected $buttonContent = null;
-	
+
 	/**
 	 * Create a new action button.
 	 *
@@ -37,18 +37,18 @@ class FormAction extends FormField {
 	 * @param Form $form (Deprecated) The parent form, auto-set when the field is placed inside a form
 	 */
 	function __construct($action, $title = "", $form = null) {
-        if ($form) {
-            Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
-        }
+		if ($form) {
+			Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
+		}
 		$this->action = "action_$action";
-		
+
 		parent::__construct($this->action, $title);
 	}
 
 	function actionName() {
 		return substr($this->name, 7);
 	}
-	
+
 	/**
 	 * Set the full action name, including action_
 	 * This provides an opportunity to replace it with something else
@@ -67,10 +67,10 @@ class FormAction extends FormField {
 				'UseButtonTag' => $this->useButtonTag
 			)
 		);
-		
+
 		return parent::Field($properties);
 	}
-	
+
 	function FieldHolder($properties = array()) {
 		return $this->Field($properties);
 	}
@@ -82,7 +82,7 @@ class FormAction extends FormField {
 	function getAttributes() {
 		$type = (isset($this->attributes['src'])) ? 'image' : 'submit';
 		$type = ($this->useButtonTag) ? null : $type;
-		
+
 		return array_merge(
 			parent::getAttributes(),
 			array(

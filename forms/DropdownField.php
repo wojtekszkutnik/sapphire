@@ -81,14 +81,14 @@ class DropdownField extends FormField {
 	 * natural language description shown in the interface element.
 	 */
 	protected $source;
-	
+
 	/**
 	 * @var boolean $isSelected Determines if the field was selected
 	 * at the time it was rendered, so if {@link $value} matches on of the array
 	 * values specified in {@link $source}
 	 */
 	protected $isSelected;
-	
+
 	/**
 	 * @var boolean $hasEmptyDefault Show the first <option> element as
 	 * empty (not having a value), with an optional label defined through
@@ -96,13 +96,13 @@ class DropdownField extends FormField {
 	 * rendered with the first option from {@link $source} selected.
 	 */
 	protected $hasEmptyDefault = false;
-	
+
 	/**
 	 * @var string $emptyString The title shown for an empty default selection,
 	 * e.g. "Select...".
 	 */
 	protected $emptyString = '';
-	
+
 	/**
 	 * Creates a new dropdown field.
 	 * @param string $name The field name
@@ -115,9 +115,9 @@ class DropdownField extends FormField {
 	 *  Argument is deprecated in 3.1, please use {@link setEmptyString()} and/or {@link setHasEmptyDefault(true)} instead.
 	 */
 	function __construct($name, $title = null, $source = array(), $value = '', $form = null, $emptyString = null) {
-        if ($form) {
-            Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
-        }
+		if ($form) {
+			Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
+		}
 		$this->setSource($source);
 
 		if($emptyString === true) {
@@ -132,7 +132,7 @@ class DropdownField extends FormField {
 
 		parent::__construct($name, ($title===null) ? $name : $title, $value);
 	}
-	
+
 	function Field($properties = array()) {
 		$source = $this->getSource();
 		$options = array();
@@ -202,7 +202,7 @@ class DropdownField extends FormField {
 		$this->source = $source;
 		return $this;
 	}
-	
+
 	/**
 	 * @param boolean $bool
 	 */
@@ -210,7 +210,7 @@ class DropdownField extends FormField {
 		$this->hasEmptyDefault = $bool;
 		return $this;
 	}
-	
+
 	/**
 	 * @return boolean
 	 */
