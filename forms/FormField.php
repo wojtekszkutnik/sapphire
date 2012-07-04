@@ -172,6 +172,13 @@ class FormField extends RequestHandler {
 		return $this->getName();
 	}
 
+    /*
+     * Returns field validators
+     */
+    public function getValidators() {
+        return $this->validators;
+    }
+
 	/** 
 	 * Returns the field message, used by form validation.
 	 * Use {@link setError()} to set this property.

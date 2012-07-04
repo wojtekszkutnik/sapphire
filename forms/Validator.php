@@ -70,7 +70,13 @@ abstract class Validator extends Object {
 		// Call individual field validators first
 		$fields = $this->form->Fields();
 		foreach($fields as $field) {
+			// Old-style FormField internal validation
 			$field->validate($this);
+
+			// New, FieldValidator-based validation
+			foreach($field->getValidators() as $validator) {
+				$validator->validate($field, $this);
+			}
 		}
 
 		// Then call the global form validator
