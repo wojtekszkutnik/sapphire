@@ -1,6 +1,9 @@
 <?php
 /**
- * Validates e-mails
+ * Validates for RFC 2822 compliant email adresses.
+ *
+ * @see http://www.regular-expressions.info/email.html
+ git* @see http://www.ietf.org/rfc/rfc2822.txt
  */
 class EmailValidator extends FieldValidator{
     function validate($field, $validator) {
