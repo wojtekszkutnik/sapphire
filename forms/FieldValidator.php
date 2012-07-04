@@ -8,7 +8,7 @@
  * @package forms
  * @subpackage validators
  */
-class FieldValidator extends Object {
+abstract class FieldValidator extends Object {
 
     /**
      * Determines whether a field is valid or not based on its value
@@ -17,7 +17,5 @@ class FieldValidator extends Object {
      * @param Validator $validator Validator class to use for error reporting
      * @return bool
      */
-    function validate($field, $validator) {
-        return true;
-    }
+    abstract function validate($field, $validator);
 }
