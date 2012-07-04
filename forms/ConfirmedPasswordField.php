@@ -89,7 +89,7 @@ class ConfirmedPasswordField extends FormField {
 		// we have labels for the subfields
 		$title = false;
 		
-		parent::__construct($name, $title, null, $form);
+		parent::__construct($name, $title);
 		$this->setValue($value);
 	}
 	

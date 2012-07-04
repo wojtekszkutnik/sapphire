@@ -39,7 +39,7 @@ class FormAction extends FormField {
 	function __construct($action, $title = "", $form = null) {
 		$this->action = "action_$action";
 		
-		parent::__construct($this->action, $title, null, $form);
+		parent::__construct($this->action, $title);
 	}
 
 	function actionName() {

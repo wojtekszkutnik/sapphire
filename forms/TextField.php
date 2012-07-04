@@ -18,7 +18,7 @@ class TextField extends FormField {
 	function __construct($name, $title = null, $value = '', $maxLength = null, $form = null) {
 		$this->maxLength = $maxLength;
 		
-		parent::__construct($name, $title, $value, $form);
+		parent::__construct($name, $title, $value);
 	}
 	
 	/**
