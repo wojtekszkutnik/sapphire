@@ -97,7 +97,7 @@ class FormField extends RequestHandler {
 	 * @var array FieldValidators
 	 */
 	protected $validators = array();
-	    
+
 	/**
 	 * Takes a fieldname and converts camelcase to spaced
 	 * words. Also resolves combined fieldnames with dot syntax
