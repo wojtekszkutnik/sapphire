@@ -263,7 +263,7 @@ class FormField extends RequestHandler {
 	 */
 	public function setTabIndex($index) {
 		Deprecation::notice('3.0', 'Use setAttribute("tabindex") instead');
-		$this->setAttribute($index);
+		$this->setAttribute("tabindex", $index);
 		return $this;
 	}
 
