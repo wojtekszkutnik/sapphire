@@ -74,7 +74,8 @@ abstract class Validator extends Object {
 			$field->validate($this);
 
 			// New, FieldValidator-based validation
-			foreach($field->getValidators() as $validator) {
+			foreach($field->getValidators() as $validator_name) {
+				$validator = new $validator_name;
 				$validator->validate($field, $this);
 			}
 		}
