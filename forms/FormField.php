@@ -94,6 +94,11 @@ class FormField extends RequestHandler {
 	protected $attributes = array();
 
 	/**
+	 * @var array FieldValidators
+	 */
+	protected $validators = array();
+	    
+	/**
 	 * Takes a fieldname and converts camelcase to spaced
 	 * words. Also resolves combined fieldnames with dot syntax
 	 * to spaced words.
@@ -190,7 +195,7 @@ class FormField extends RequestHandler {
 	} 
 
 	/**
-	 * Returns the field value - used by templates.
+	 * Returns the field value - used by templates and validators.
 	 */
 	function Value() {
 		return $this->value;
