@@ -26,10 +26,17 @@ class EmailFieldTest extends SapphireTest {
 	function internalCheck($email, $checkText, $expectSuccess) {
 		$field = new EmailField("MyEmail");
 		$field->setValue($email);
+        $form = new Form(new Controller(),
+            'Form',
+            new FieldList(
+                array($field)
+            ),
+            new FieldList());
 
 		$val = new EmailFieldTest_Validator();
+        $val->setForm($form);
 		try {
-			$field->validate($val);
+			$val->validate($field);
 			if (!$expectSuccess) $this->assertTrue(false, $checkText . " (/$email/ passed validation, but not expected to)");
 		} catch (Exception $e) {
 			if ($e instanceof PHPUnit_Framework_AssertionFailedError) throw $e; // re-throw assertion failure
