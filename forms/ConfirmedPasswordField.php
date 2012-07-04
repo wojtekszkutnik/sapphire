@@ -63,7 +63,7 @@ class ConfirmedPasswordField extends FormField {
 	 * @param string $name
 	 * @param string $title
 	 * @param mixed $value
-	 * @param Form $form
+	 * @param Form $form (Deprecated)
 	 * @param boolean $showOnClick
 	 * @param string $titleConfirmField Alternate title (not localizeable)
 	 */

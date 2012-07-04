@@ -32,9 +32,9 @@ class FormAction extends FormField {
 	/**
 	 * Create a new action button.
 	 *
-	 * @param action The method to call when the button is clicked
-	 * @param title The label on the button
-	 * @param form The parent form, auto-set when the field is placed inside a form 
+	 * @param string $action The method to call when the button is clicked
+	 * @param string $title The label on the button
+	 * @param Form $form (Deprecated) The parent form, auto-set when the field is placed inside a form
 	 */
 	function __construct($action, $title = "", $form = null) {
         if ($form) {

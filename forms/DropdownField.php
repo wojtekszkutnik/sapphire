@@ -105,12 +105,12 @@ class DropdownField extends FormField {
 	
 	/**
 	 * Creates a new dropdown field.
-	 * @param $name The field name
-	 * @param $title The field title
-	 * @param $source An map of the dropdown items
-	 * @param $value The current value
-	 * @param $form The parent form
-	 * @param $emptyString mixed Add an empty selection on to of the {@link $source}-Array 
+	 * @param string $name The field name
+	 * @param mixed $title The field title
+	 * @param array $source An map of the dropdown items
+	 * @param string $value The current value
+	 * @param Form $form (Deprecated) The parent form
+	 * @param mixed $emptyString Add an empty selection on to of the {@link $source}-Array
 	 * 	(can also be boolean, which results in an empty string)
 	 *  Argument is deprecated in 3.1, please use {@link setEmptyString()} and/or {@link setHasEmptyDefault(true)} instead.
 	 */
