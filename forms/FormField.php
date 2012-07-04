@@ -473,7 +473,7 @@ class FormField extends RequestHandler {
 
 		return $this;
 	}
-		
+
 	/**
 	 * Set the custom error message to show instead of the default
 	 * format of Please Fill In XXX. Different from setError() as

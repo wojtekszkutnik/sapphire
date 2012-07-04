@@ -37,7 +37,7 @@ class Director implements TemplateGlobalProvider {
 	 * 
 	 * The director is responsible for turning URLs into Controller objects.
 	 * 
-	 * @param $priority The priority of the rules; higher values will get your rule checked first.
+	 * @param int $priority (Deprecated) The priority of the rules; higher values will get your rule checked first.
 	 * We recommend priority 100 for your site's rules.  The built-in rules are priority 10, standard modules are priority 50.
 	 */
 	static function addRules($priority, $rules) {
@@ -603,7 +603,7 @@ class Director implements TemplateGlobalProvider {
 	/**
 	 * Takes a $_SERVER data array and extracts HTTP request headers.
 	 *
-	 * @param  array $data
+	 * @param  array $server
 	 * @return array
 	 */
 	static function extract_request_headers(array $server) {
@@ -635,8 +635,10 @@ class Director implements TemplateGlobalProvider {
 	}
 
 	/**
-	 * Returns true if the given file exists.
-	 * @param $file Filename specified relative to the site root
+	 * Checks whether a given file exists
+     *
+	 * @param Filename $file specified relative to the site root
+     * @return bool True if the given file exists
 	 */
 	static function fileExists($file) {
 		// replace any appended query-strings, e.g. /path/to/foo.php?bar=1 to /path/to/foo.php
@@ -682,7 +684,8 @@ class Director implements TemplateGlobalProvider {
 	 * 
 	 * CAUTION: This does not respect the site environment mode. You should check this
 	 * as per the above examples using Director::isLive() or Director::isTest() for example.
-	 * 
+	 *
+     * @param array patterns
 	 * @return boolean|string String of URL when unit tests running, boolean FALSE if patterns don't match request URI
 	 */
 	static function forceSSL($patterns = null) {
