@@ -66,9 +66,18 @@ abstract class Validator extends Object {
 	 */
 	function validate(){
 		$this->errors = null;
+
+		// Call individual field validators first
+		$fields = $this->form->Fields();
+		foreach($fields as $field) {
+			$field->validate($this);
+		}
+
+		// Then call the global form validator
 		$this->php($this->form->getData());
 		return $this->errors;
 	}
+
 
 	/**
 	 * Callback to register an error on a field (Called from implementations of {@link FormField::validate})
