@@ -37,7 +37,7 @@ class Director implements TemplateGlobalProvider {
 	 * 
 	 * The director is responsible for turning URLs into Controller objects.
 	 * 
-	 * @param $priority The priority of the rules; higher values will get your rule checked first.  
+	 * @param $priority The priority of the rules; higher values will get your rule checked first.
 	 * We recommend priority 100 for your site's rules.  The built-in rules are priority 10, standard modules are priority 50.
 	 */
 	static function addRules($priority, $rules) {

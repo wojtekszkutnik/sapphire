@@ -115,6 +115,9 @@ class DropdownField extends FormField {
 	 *  Argument is deprecated in 3.1, please use {@link setEmptyString()} and/or {@link setHasEmptyDefault(true)} instead.
 	 */
 	function __construct($name, $title = null, $source = array(), $value = '', $form = null, $emptyString = null) {
+        if ($form) {
+            Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
+        }
 		$this->setSource($source);
 
 		if($emptyString === true) {
@@ -127,7 +130,7 @@ class DropdownField extends FormField {
 		if($emptyString) $this->setHasEmptyDefault(true);
 		if(is_string($emptyString)) $this->setEmptyString($emptyString);
 
-		parent::__construct($name, ($title===null) ? $name : $title, $value, $form);
+		parent::__construct($name, ($title===null) ? $name : $title, $value);
 	}
 	
 	function Field($properties = array()) {

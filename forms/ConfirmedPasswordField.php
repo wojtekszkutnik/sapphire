@@ -68,6 +68,9 @@ class ConfirmedPasswordField extends FormField {
 	 * @param string $titleConfirmField Alternate title (not localizeable)
 	 */
 	function __construct($name, $title = null, $value = "", $form = null, $showOnClick = false, $titleConfirmField = null) {
+        if ($form) {
+            Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
+        }
 		// naming with underscores to prevent values from actually being saved somewhere
 		$this->children = new FieldList(
 			new PasswordField(

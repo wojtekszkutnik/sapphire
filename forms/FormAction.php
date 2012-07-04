@@ -37,6 +37,9 @@ class FormAction extends FormField {
 	 * @param form The parent form, auto-set when the field is placed inside a form 
 	 */
 	function __construct($action, $title = "", $form = null) {
+        if ($form) {
+            Deprecation::notice('3.1', 'Form argument is now ignored. It was not used for some time and passing it has no effect.');
+        }
 		$this->action = "action_$action";
 		
 		parent::__construct($this->action, $title);
