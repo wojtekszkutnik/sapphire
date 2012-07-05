@@ -21,10 +21,20 @@ abstract class FieldValidator extends Object {
      */
     abstract function validate($field, $validator);
 
+    /**
+     * Param setter
+     */
     function setParam($name, $value) {
         $this->params[$name] = $value;
     }
 
+    /**
+     * Param getter
+     *
+     * @param string $name Param name
+     * @param mixed $default Default value (used in case of non-existant param name)
+     * @return Param value for existing parameter, $default value otherwise
+     */
     function getParam($name, $default=null) {
         if (array_key_exists($name, $this->params))
             return $this->params[$name];
