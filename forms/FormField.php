@@ -174,18 +174,26 @@ class FormField extends RequestHandler {
 		return $this->getName();
 	}
 
-	/*
+	/**
 	 * Returns field validators
 	 */
 	public function getValidators() {
 		return $this->validators;
 	}
 
-	/*
+	/**
 	 * Returns field constraints
 	 */
 	public function getConstraints() {
 		return $this->constraints;
+	}
+
+	/**
+	 * Constraint setter
+	 */
+	public function setConstraint($name, $value) {
+		$this->constraints[$name] = $value;
+		return $this;
 	}
 
 	/** 

@@ -75,7 +75,7 @@ abstract class Validator extends Object {
 
             // Constraints
             foreach($field->getConstraints() as $constraint=>$value) {
-                $factory_name = ucfirst($constraint) . 'ValidatorFactory';
+                $factory_name = $constraint . 'ValidatorFactory';
                 $validator_factory = new $factory_name;
                 $validator = $validator_factory->getValidator($value);
                 $validator->validate($field, $this);
