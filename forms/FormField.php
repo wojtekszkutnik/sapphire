@@ -283,6 +283,15 @@ class FormField extends RequestHandler {
 		return $this;
 	}
 
+
+    /**
+     * Add maxLength constraint
+     */
+    public function setMaxLength($length) {
+        $this->setConstraint('MaxLength', $length);
+        return $this;
+    }
+    
 	/**
 	 * Set tabindex HTML attribute
 	 * (defaults to none).
