@@ -8,7 +8,7 @@
  */
 class EmailField extends TextField {
 
-    protected $validators = array('EmailValidator');
+	protected $validators = array('EmailValidator');
 
 	function Type() {
 		return 'email text';
