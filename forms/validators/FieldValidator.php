@@ -25,10 +25,10 @@ abstract class FieldValidator extends Object {
         $this->params[$name] = $value;
     }
 
-    function getParam($name) {
+    function getParam($name, $default=null) {
         if (array_key_exists($name, $this->params))
             return $this->params[$name];
         else
-            return null;
+            return $default;
     }
 }
