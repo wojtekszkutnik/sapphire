@@ -26,6 +26,7 @@ abstract class FieldValidator extends Object {
      */
     function setParam($name, $value) {
         $this->params[$name] = $value;
+        return $this;
     }
 
     /**

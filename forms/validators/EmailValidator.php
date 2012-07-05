@@ -17,7 +17,7 @@ class EmailValidator extends FieldValidator{
         if($field_value && !preg_match('/' . $pregSafePattern . '/i', $field_value)){
             $validator->validationError(
                 $field->getName(),
-                _t('EmailField.VALIDATION', "Please enter an email address"),
+                _t('FormField.VALIDATION', "Please enter an email address"),
                 "validation"
             );
             return false;
