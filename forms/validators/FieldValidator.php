@@ -10,6 +10,8 @@
  */
 abstract class FieldValidator extends Object {
 
+    protected $params = array();
+
     /**
      * Determines whether a field is valid or not based on its value
      *
@@ -18,4 +20,12 @@ abstract class FieldValidator extends Object {
      * @return bool
      */
     abstract function validate($field, $validator);
+
+    function setParam($name, $value) {
+        $this->params[$name] = $value;
+    }
+
+    function getParam($name) {
+        return $this->params[$name];
+    }
 }
