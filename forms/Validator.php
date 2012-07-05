@@ -73,6 +73,14 @@ abstract class Validator extends Object {
 			// Old-style FormField internal validation
 			$field->validate($this);
 
+            // Constraints
+            foreach($field->getConstraints() as $constraint=>$value) {
+                $factory_name = ucfirst($constraint) . 'ValidatorFactory';
+                $validator_factory = new $factory_name;
+                $validator = $validator_factory->getValidator($value);
+                $validator->validate($field, $this);
+            }
+
 			// New, FieldValidator-based validation
 			foreach($field->getValidators() as $validator_name) {
 				$validator = new $validator_name;
