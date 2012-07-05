@@ -98,6 +98,8 @@ class FormField extends RequestHandler {
 	 */
 	protected $validators = array();
 
+	protected $constraints = array();
+
 	/**
 	 * Takes a fieldname and converts camelcase to spaced
 	 * words. Also resolves combined fieldnames with dot syntax
@@ -172,12 +174,19 @@ class FormField extends RequestHandler {
 		return $this->getName();
 	}
 
-    /*
-     * Returns field validators
-     */
-    public function getValidators() {
-        return $this->validators;
-    }
+	/*
+	 * Returns field validators
+	 */
+	public function getValidators() {
+		return $this->validators;
+	}
+
+	/*
+	 * Returns field constraints
+	 */
+	public function getConstraints() {
+		return $this->constraints;
+	}
 
 	/** 
 	 * Returns the field message, used by form validation.
