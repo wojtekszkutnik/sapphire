@@ -10,7 +10,7 @@
  * @package forms
  * @subpackage validators
  */ 
-abstract class Validator extends Object {
+class Validator extends Object {
 
 	/**
 	 * @var Form $form
@@ -142,6 +142,8 @@ abstract class Validator extends Object {
 		return false;
 	}
 
-	abstract function php($data);
+	function php($data) {
+        return true;
+    }
 }
 
