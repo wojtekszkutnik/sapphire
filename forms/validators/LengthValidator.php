@@ -11,7 +11,7 @@ class LengthValidator extends FieldValidator {
      * @param string $comparison 'lte' for 'lower than or equal',
      *                    'gte' for 'greater than or equal'
      */
-    function __construct($length, $comparison) {
+    function __construct($comparison, $length) {
         $this->setParam('length', $length)
              ->setParam('comparison', $comparison);
     }
