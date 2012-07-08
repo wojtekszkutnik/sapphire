@@ -6,7 +6,7 @@
 class EmailValidatorTest extends SapphireTest {
     function setUp() {
         parent::setUp();
-        $this->field = new EmailField('Email', null, 'john.doeexample.com');
+        $this->field = new EmailField('Email', null, 'john.doe@example.com');
         $this->form = new Form(new Controller(),
                                'Form',
                                new FieldList(array($this->field)),
@@ -18,15 +18,14 @@ class EmailValidatorTest extends SapphireTest {
 
     function testEmailValidatorCallsValidationErrorOnInvalidEmailAddress() {
         $validator = $this->getMock('Validator', array('validationError'));
-        $field = new EmailField('Email', null, 'john.doeexample.com');
-        $form = new Form(new Controller(), 'Form', new FieldList(array($field)), new FieldList());
+        $this->field->setValue('invalidemail@@gmail.com');
         $validator->expects($this->once())
             ->method('validationError')
             ->with('Email',
             _t('FormField.VALIDATION', "Please enter an email address"),
             "validation");
-        $validator->setForm($form);
-        $this->email_validator->validate($field, $validator);
+        $validator->setForm($this->form);
+        $this->email_validator->validate($this->field, $validator);
     }
 
     /**
