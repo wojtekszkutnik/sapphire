@@ -29,6 +29,17 @@ class EmailValidatorTest extends SapphireTest {
         $this->email_validator->validate($field, $validator);
     }
 
+    /**
+     * Check the php validator for email addresses. We should be checking against RFC 5322 which defines email address
+     * syntax.
+     *
+     * @TODO
+     *   - double quotes around the local part (before @) is not supported
+     *   - special chars ! # $ % & ' * + - / = ? ^ _ ` { | } ~ are all valid in local part
+     *   - special chars ()[]\;:,<> are valid in the local part if the local part is in double quotes
+     *   - "." is valid in the local part as long as its not first or last char
+     * @return void
+     */
     function testValidatorProperlyValidatesEmailValues() {
 		$this->internalValueTest("blah@blah.com", true);
 		$this->internalValueTest("mr.o'connor+on-toast@blah.com", true);
